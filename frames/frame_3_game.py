@@ -145,13 +145,13 @@ def game_loop():
             global game_display
             global isfull
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F1 and not win.isfull:
+                if event.key == pygame.K_F4 and not win.isfull:
                     win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
                     win.isfull = True
-                if event.key == pygame.K_ESCAPE and win.isfull:
+                if event.key == pygame.K_F1 and win.isfull:
                     win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
                     win.isfull = False
-                if event.key == pygame.K_F4:
+                if event.key == pygame.K_ESCAPE:
                     game_exit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar:
@@ -169,6 +169,8 @@ def game_loop():
                 if event.key == pygame.K_c:
                     print(script)
                     print(line_count)
+                if event.key == pygame.K_v:
+                    import frames.frame_4_fight
 
     # Left right movement
             if event.type == pygame.KEYDOWN and move:
