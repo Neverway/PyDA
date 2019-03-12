@@ -140,9 +140,15 @@ def game_loop():
 
             debug()
     # Action / Interaction
+            global game_display
+            global isfull
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    game_exit = True
+                if event.key == pygame.K_F1 and not win.isfull:
+                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
+                    win.isfull = True
+                if event.key == pygame.K_ESCAPE and win.isfull:
+                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
+                    win.isfull = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar:
                     show_chatbar = True

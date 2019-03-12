@@ -1,17 +1,20 @@
 from Divine_Annihilation import *
 from files import text_lines as tl, win_config as win, img_load as img
+import os
+path = os.path.abspath("frames/retro.ttf")
 
 # This is important and needs to be first
 pygame.init()
 pygame.font.init()
 # Font
 render_text2 = "Version 0.0.1"
-font = pygame.font.SysFont('Courier New', 20)
-text_surface2 = font.render(render_text2, True, (255, 255, 255))
+font2 = pygame.font.Font(path, 12)
+text_surface2 = font2.render(render_text2, False, (255, 255, 255))
 
 menu_id = 1
 
 bar = img.new_game
+
 
 
 def menu(x, y):
@@ -73,9 +76,15 @@ def game_loop():
 
             debug()
     # Action / Interaction
+            global game_display
+            global isfull
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    game_exit = True
+                if event.key == pygame.K_F1 and not win.isfull:
+                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
+                    win.isfull = True
+                if event.key == pygame.K_ESCAPE and win.isfull:
+                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
+                    win.isfull = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and menu_id == 1:
                     print("New Game")
