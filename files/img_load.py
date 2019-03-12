@@ -27,3 +27,7 @@ hp_shelf = pygame.image.load('sprites/hud_hp_shelf.png')
 
 # Entities
 test_entity = pygame.image.load('sprites/ent_testent.png')
+
+# Fight
+fight_back = pygame.image.load('sprites/back_fight_colorbar.png')
+fight_char = pygame.image.load('sprites/ent_fight_char.png')
