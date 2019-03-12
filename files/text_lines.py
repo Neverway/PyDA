@@ -27,6 +27,11 @@ text6 = {
     2: "Text 6 line 2/3 loaded.",
     1: "Text 6 line 3/3 loaded. Text 6 test successful!"
 }
+
+# Fight
+bt_intro = {
+    1: "(atk_enm) draws near!"
+}
 # def delay_txt():
 #    global text_surface
 #    text = render_text
