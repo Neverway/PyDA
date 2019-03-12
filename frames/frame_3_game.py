@@ -10,8 +10,7 @@ pygame.font.init()
 
 font = pygame.font.SysFont('Courier New', 20)
 font2 = pygame.font.Font(path, 12)
-line_count = 1
-script = tl.failsafe.get(1)
+
 render_text = script
 text_surface = font.render(render_text, True, (255, 255, 255))
 # Variables
@@ -58,28 +57,30 @@ def debug():
     global render_text
     global line_count
     global script
+    global default_line_count
+    default_line_count = 1
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_0:
-            line_count = 1
-            script = tl.failsafe.get(line_count)
+            script = tl.failsafe.get(1)
+            default_line_count = 1
         if event.key == pygame.K_1:
-            line_count = 1
-            script = tl.text1.get(line_count)
+            script = tl.text1.get(1)
+            default_line_count = 1
         if event.key == pygame.K_2:
-            line_count = 1
-            script = tl.text2.get(line_count)
+            script = tl.text2.get(1)
+            default_line_count = 1
         if event.key == pygame.K_3:
-            line_count = 1
-            script = tl.text3.get(line_count)
+            script = tl.text3.get(1)
+            default_line_count = 1
         if event.key == pygame.K_4:
-            line_count = 1
-            script = tl.text4.get(line_count)
+            script = tl.text4.get(1)
+            default_line_count = 1
         if event.key == pygame.K_5:
-            line_count = 2
-            script = tl.text5.get(line_count)
+            script = tl.text5.get(2)
+            restore = 2
         if event.key == pygame.K_6:
-            line_count = 3
-            script = tl.text6.get(line_count)
+            script = tl.text6.get(3)
+            restore = 3
 
 
 #######################
@@ -130,6 +131,7 @@ def game_loop():
     global render_text
     global line_count
     global script
+    global restore
 
     game_exit = False
 
@@ -154,15 +156,16 @@ def game_loop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar:
                     show_chatbar = True
-                    line_count -= 1
-                if event.key == pygame.K_x and line_count == 0:
-                    show_chatbar = False
-                    move = False
-                    script = "You should never see this message."
-                    line_count = 1
+                    pygame.display.update()
                 if event.key == pygame.K_x and line_count >= 1 and show_chatbar:
                     line_count -= 1
                     render_text = script
+                    print(line_count)
+                    if line_count == 0:
+                        show_chatbar = False
+                        move = False
+                        line_count = restore
+
                 if event.key == pygame.K_c:
                     print(script)
                     print(line_count)
