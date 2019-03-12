@@ -10,10 +10,12 @@ pygame.font.init()
 
 font = pygame.font.SysFont('Courier New', 20)
 font2 = pygame.font.Font(path, 12)
+font3 = pygame.font.Font(path, 16)
 
 player_name = "Dev_1"
 tl = tl
 img = img
+render_text2 = "An enemy draws near!"
 
 
 def hud_hp_shelf():
@@ -24,13 +26,17 @@ def hud_hp_shelf():
 
 def chat_text():
     global text_surface
-    text_surface = font.render(render_text, True, (255, 255, 255))
+    text_surface = font3.render(render_text2, False, (255, 255, 255))
     win.game_display.blit(text_surface, (10, 483))
 
 
 def chatbar():
     win.game_display.blit(img.chtbar, (0, 473))
     chat_text()
+
+
+def char(x, y):
+    win.game_display.blit(img.fight_char, (x, y))
 
 
 def debug():
@@ -40,18 +46,23 @@ def debug():
 #######################
 def pyupdate():
     chatbar()
+    char(15, 200)
+    hud_hp_shelf()
 #######################
 
 
 def game_loop():
     game_exit = False
-
+    global event
+    fdx = 0
+    fdxmv = True
     while not game_exit:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_exit = True
 
             global isfull
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F4 and not win.isfull:
                     win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
@@ -66,6 +77,15 @@ def game_loop():
 
     # End group
         win.game_display.fill(win.black)
+        win.game_display.blit(img.fight_back, (fdx, 200))
+        if fdxmv:
+            fdx -= .05
+        if not fdxmv:
+            fdx += .05
+        if fdx == -500:
+            fdxmv = False
+        if fdx == 1:
+            fdxmv = True
         pyupdate()
         pygame.display.update()
     clock.tick(30)
