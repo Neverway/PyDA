@@ -1,15 +1,15 @@
 from Divine_Annihilation import *
 from files import text_lines as tl, win_config as win, img_load as img
-import threading
+
+tl = tl
 
 
 def splash(x, y):
     win.game_display.blit(img.splash, (x, y))
 
 
-
 def debug():
- pass
+    pass
 
 
 #######################
@@ -38,6 +38,7 @@ def game_loop():
         pyupdate()
         pygame.time.wait(3000)
         from frames import frame_2_main
+        frame_2_main = frame_2_main
         pygame.display.update()
 
 

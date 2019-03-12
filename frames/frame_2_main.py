@@ -26,7 +26,6 @@ def menu(x, y):
 
 
 def debug():
-    global render_text
     global line_count
     global script
     if event.type == pygame.KEYDOWN:
@@ -64,9 +63,7 @@ def pyupdate():
 
 def game_loop():
     global event
-    global render_text
     global menu_id
-    global current_frame
     game_exit = False
 
     while not game_exit:
@@ -93,8 +90,7 @@ def game_loop():
                 if event.key == pygame.K_c:
                     print(menu_id)
 
-
-            # Up Down movement
+    # Up Down movement
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     menu_id -= 1

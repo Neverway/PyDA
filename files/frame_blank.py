@@ -1,9 +1,12 @@
 from Divine_Annihilation import *
 from files import text_lines as tl, win_config as win, img_load as img
 
+tl = tl
+img = img
+
 
 def debug():
- pass
+    pass
 
 
 #######################
