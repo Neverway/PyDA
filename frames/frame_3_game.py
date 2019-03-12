@@ -149,6 +149,8 @@ def game_loop():
                 if event.key == pygame.K_ESCAPE and win.isfull:
                     win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
                     win.isfull = False
+                if event.key == pygame.K_F4:
+                    game_exit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar:
                     show_chatbar = True

@@ -8,7 +8,7 @@ pygame.init()
 pygame.font.init()
 # Font
 # Font
-render_text2 = "Loading.."
+render_text2 = "Loading..."
 font2 = pygame.font.Font(path, 12)
 text_surface2 = font2.render(render_text2, False, (255, 255, 255))
 
@@ -27,7 +27,7 @@ def debug():
 #######################
 def pyupdate():
     splash(200, 200)
-    win.game_display.blit(text_surface2, (150, 400))
+    win.game_display.blit(text_surface2, (600, 570))
     pygame.display.update()
 #######################
 
