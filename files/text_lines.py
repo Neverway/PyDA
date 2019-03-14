@@ -7,7 +7,7 @@ failsafe = {
     1: "Text test failed successfully!"
 }
 text1 = {
-    1: "Text 1 test successful!"
+    1: "This is a text line. In a text box. (1)"
 }
 text2 = {
     1: "Text 2 test successful!"

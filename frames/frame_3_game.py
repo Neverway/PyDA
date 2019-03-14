@@ -13,7 +13,7 @@ font2 = pygame.font.Font(path, 12)
 
 render_text = script
 text_surface = font.render(render_text, True, (255, 255, 255))
-# Variables
+
 # Character
 move = True
 character = img.char_right
@@ -22,8 +22,25 @@ direction = "right"
 current_frame = 0
 last_update = 0
 # Other
-show_chatbar = False
 player_name = "Dev_01"
+
+# Text
+show_chatbar = False
+last_update2 = 0
+zed = False
+line_count = 0
+
+
+def delay():
+    global last_update2
+    global zallow
+    now = pygame.time.get_ticks()
+    if zed:
+        if now - last_update2 > 200:
+            last_update2 = now
+            zallow = True
+    if not zed:
+            zallow = False
 
 
 def char(x, y):
@@ -80,35 +97,14 @@ def chatbar():
 
 def debug():
     global render_text
-    global line_count
     global script
-    global default_line_count
-    default_line_count = 1
+    global line_count
+
     if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_0:
-            script = tl.failsafe.get(1)
-            default_line_count = 1
         if event.key == pygame.K_1:
-            script = tl.text1.get(1)
-            default_line_count = 1
-        if event.key == pygame.K_2:
-            script = tl.text2.get(1)
-            default_line_count = 1
-        if event.key == pygame.K_3:
-            script = tl.text3.get(1)
-            default_line_count = 1
-        if event.key == pygame.K_4:
-            script = tl.text4.get(1)
-            default_line_count = 1
-        if event.key == pygame.K_5:
-            script = tl.text5.get(2)
-            restore = 2
-        if event.key == pygame.K_6:
-            script = tl.text6.get(3)
-            restore = 3
-        if event.key == pygame.K_a:
-            print(direction)
-            print(walking)
+            line_count = 1
+            script = tl.text1.get(line_count)
+            render_text = script
 
 
 #######################
@@ -128,16 +124,24 @@ def game_loop():
     y = (win.display_height * 0.8)
     x_change = 0
     y_change = 0
+
+
+    # Character
     global character
-    global show_chatbar
-    global move
-    global event
-    global render_text
-    global line_count
-    global script
-    global restore
     global walking
     global direction
+    global move
+
+    global event
+
+    global render_text
+    global script
+    global show_chatbar
+    global zed
+    global zallow
+    global line_count
+
+    zallow = False
 
     game_exit = False
 
@@ -163,17 +167,20 @@ def game_loop():
 
     # Action / Interaction
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_z and not show_chatbar:
+                if event.key == pygame.K_z and not show_chatbar and not zallow:
                     show_chatbar = True
-                    pygame.display.update()
-                if event.key == pygame.K_x and line_count >= 1 and show_chatbar:
+                    print("Show the cats!")
+                    # Delay
+                    zed = True
+                if event.key == pygame.K_z and show_chatbar and zallow:
                     line_count -= 1
-                    render_text = script
-                    print(line_count)
-                    if line_count == 0:
-                        show_chatbar = False
-                        move = False
-                        line_count = restore
+                    print("Meow.")
+                if event.key == pygame.K_z and show_chatbar and zallow and line_count <= 0:
+                    show_chatbar = False
+                    line_count = 1
+                    zed = False
+                if event.key == pygame.K_x and line_count == 0 and show_chatbar:
+                    show_chatbar = False
 
                 if event.key == pygame.K_v:
                     import frames.frame_4_fight
@@ -181,13 +188,13 @@ def game_loop():
     # Left right movement
             if event.type == pygame.KEYDOWN and move:
                 if event.key == pygame.K_LEFT:
-                    x_change = -0.025
+                    x_change = -0.1
                     walking = True
                     direction = "left"
                     pygame.display.update()
 
                 elif event.key == pygame.K_RIGHT:
-                    x_change = 0.025
+                    x_change = 0.1
                     walking = True
                     direction = "right"
                     pygame.display.update()
@@ -200,13 +207,13 @@ def game_loop():
     # Up Down movement
             if event.type == pygame.KEYDOWN and move:
                 if event.key == pygame.K_UP:
-                    y_change = -0.025
+                    y_change = -0.1
                     walking = True
                     direction = "up"
                     pygame.display.update()
 
                 elif event.key == pygame.K_DOWN:
-                    y_change = 0.025
+                    y_change = 0.1
                     walking = True
                     direction = "down"
                     pygame.display.update()
@@ -221,6 +228,7 @@ def game_loop():
         x += x_change
         y += y_change
         pyupdate()
+        delay()
         char(x, y)
         testent(15, 15)
         hud_hp_shelf()
