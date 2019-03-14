@@ -2,7 +2,23 @@ import pygame
 
 # Load sprites
 # Splash
-splash = pygame.image.load('sprites/men_splash_logo.png')
+sp0 = pygame.image.load('sprites/men_splash_logo0.png')
+sp1 = pygame.image.load('sprites/men_splash_logo1.png')
+sp2 = pygame.image.load('sprites/men_splash_logo2.png')
+sp3 = pygame.image.load('sprites/men_splash_logo3.png')
+splash = {
+    1: sp0,
+    2: sp1,
+    3: sp2,
+    4: sp3,
+    5: sp3,
+    6: sp3,
+    7: sp2,
+    8: sp1,
+    9: sp0,
+    10: sp0,
+    11: sp0
+}
 
 # Main Menu
 new_game = pygame.image.load('sprites/men_main_1new.png')

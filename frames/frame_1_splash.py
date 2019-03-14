@@ -11,13 +11,28 @@ pygame.font.init()
 render_text2 = "Loading..."
 font2 = pygame.font.Font(path, 12)
 text_surface2 = font2.render(render_text2, False, (255, 255, 255))
-
+last_splash_update = 0
+current_splash_frame = 0
+dasplash = img.sp1
+loop = True
 
 tl = tl
 
 
-def splash(x, y):
-    win.game_display.blit(img.splash, (x, y))
+def splashan():
+    global last_splash_update
+    global current_splash_frame
+    global dasplash
+
+    now = pygame.time.get_ticks()
+
+    if now - last_splash_update > 500:
+        last_splash_update = now
+        if current_splash_frame >= 11:
+            from frames import frame_2_main
+        current_splash_frame += 1
+        dasplash = img.splash.get(current_splash_frame)
+    win.game_display.blit(dasplash, (200, 200))
 
 
 def debug():
@@ -26,9 +41,10 @@ def debug():
 
 #######################
 def pyupdate():
-    splash(200, 200)
+    splashan()
     win.game_display.blit(text_surface2, (600, 570))
     pygame.display.update()
+
 #######################
 
 
@@ -42,17 +58,12 @@ def game_loop():
 
             debug()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
-                    pass
+                from frames import frame_2_main
 
     # End group
         win.game_display.fill(win.black)
         pygame.mouse.set_visible(False)
         pyupdate()
-        pygame.time.wait(2000)
-        from frames import frame_2_main
-        frame_2_main = frame_2_main
-        pygame.display.update()
 
 
 game_loop()

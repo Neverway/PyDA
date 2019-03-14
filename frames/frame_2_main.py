@@ -7,7 +7,7 @@ path = os.path.abspath("frames/retro.ttf")
 pygame.init()
 pygame.font.init()
 # Font
-render_text2 = "Version 0.0.2"
+render_text2 = "Version 0.0.3"
 font2 = pygame.font.Font(path, 12)
 text_surface2 = font2.render(render_text2, False, (255, 255, 255))
 
