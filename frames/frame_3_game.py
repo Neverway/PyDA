@@ -29,6 +29,7 @@ show_chatbar = False
 last_update2 = 0
 zed = False
 line_count = 0
+saved_count = 1
 
 
 def delay():
@@ -99,11 +100,23 @@ def debug():
     global render_text
     global script
     global line_count
+    global saved_count
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_1:
+            saved_count = 1
             line_count = 1
             script = tl.text1.get(line_count)
+            render_text = script
+        if event.key == pygame.K_2:
+            saved_count = 1
+            line_count = 1
+            script = tl.text2.get(line_count)
+            render_text = script
+        if event.key == pygame.K_3:
+            saved_count = 2
+            line_count = 2
+            script = tl.text3.get(line_count)
             render_text = script
 
 
@@ -174,13 +187,12 @@ def game_loop():
                     zed = True
                 if event.key == pygame.K_z and show_chatbar and zallow:
                     line_count -= 1
+                    print(line_count)
                     print("Meow.")
                 if event.key == pygame.K_z and show_chatbar and zallow and line_count <= 0:
                     show_chatbar = False
-                    line_count = 1
+                    line_count = saved_count
                     zed = False
-                if event.key == pygame.K_x and line_count == 0 and show_chatbar:
-                    show_chatbar = False
 
                 if event.key == pygame.K_v:
                     import frames.frame_4_fight

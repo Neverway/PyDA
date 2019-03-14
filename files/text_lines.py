@@ -4,7 +4,7 @@
 #   line 3 = Event (e = error, o = other, d = debug)
 #   line 4 = Line
 failsafe = {
-    1: "Text test failed successfully!"
+    0: "Text test failed successfully!"
 }
 text1 = {
     1: "This is a text line. In a text box. (1)"
@@ -13,7 +13,8 @@ text2 = {
     1: "Text 2 test successful!"
 }
 text3 = {
-    1: "Text 3 test successful!"
+    2: "Text 5 first line.",
+    1: "Text 5 second line. Text 5 test successful!"
 }
 text4 = {
     1: "Text 4 test successful!"
