@@ -16,10 +16,40 @@ char_up = pygame.image.load('sprites/ent_char_up.png')
 char_down = pygame.image.load('sprites/ent_char_down.png')
 char_left = pygame.image.load('sprites/ent_char_left.png')
 char_right = pygame.image.load('sprites/ent_char_right.png')
-char_up_walk = [pygame.image.load('sprites/ent_char_up_walk_1.png'), pygame.image.load('sprites/ent_char_up_walk_2.png'), pygame.image.load('sprites/ent_char_up_walk_3.png'), ]
-char_down_walk = [pygame.image.load('sprites/ent_char_down_walk_1.png'), pygame.image.load('sprites/ent_char_down_walk_2.png'), pygame.image.load('sprites/ent_char_down_walk_3.png'), ]
-char_left_walk = [pygame.image.load('sprites/ent_char_left_walk_1.png'), pygame.image.load('sprites/ent_char_left_walk_2.png'), pygame.image.load('sprites/ent_char_left_walk_3.png'), ]
-char_right_walk = [pygame.image.load('sprites/ent_char_right_walk_1.png'), pygame.image.load('sprites/ent_char_right_walk_2.png'), pygame.image.load('sprites/ent_char_right_walk_3.png'), ]
+up_walk_1 = pygame.image.load('sprites/ent_char_up_walk_1.png')
+up_walk_2 = pygame.image.load('sprites/ent_char_up_walk_2.png')
+up_walk_3 = pygame.image.load('sprites/ent_char_up_walk_3.png')
+down_walk_1 = pygame.image.load('sprites/ent_char_down_walk_1.png')
+down_walk_2 = pygame.image.load('sprites/ent_char_down_walk_2.png')
+down_walk_3 = pygame.image.load('sprites/ent_char_down_walk_3.png')
+left_walk_1 = pygame.image.load('sprites/ent_char_left_walk_1.png')
+left_walk_2 = pygame.image.load('sprites/ent_char_left_walk_2.png')
+left_walk_3 = pygame.image.load('sprites/ent_char_left_walk_3.png')
+right_walk_1 = pygame.image.load('sprites/ent_char_right_walk_1.png')
+right_walk_2 = pygame.image.load('sprites/ent_char_right_walk_2.png')
+right_walk_3 = pygame.image.load('sprites/ent_char_right_walk_3.png')
+# Walk
+char_left_walk = {
+    1: left_walk_1,
+    2: left_walk_2,
+    3: left_walk_3
+}
+char_right_walk = {
+    1: right_walk_1,
+    2: right_walk_2,
+    3: right_walk_3
+}
+char_up_walk = {
+    1: up_walk_1,
+    2: up_walk_2,
+    3: up_walk_3
+}
+char_down_walk = {
+    1: down_walk_1,
+    2: down_walk_2,
+    3: down_walk_3
+}
+
 
 # Hud
 chtbar = pygame.image.load('sprites/hud_chatbar.png')

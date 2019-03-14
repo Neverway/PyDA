@@ -16,19 +16,44 @@ text_surface = font.render(render_text, True, (255, 255, 255))
 # Variables
 # Character
 move = True
-up = False
-down = False
-left = False
-right = False
-facing = img.char_right
 character = img.char_right
-walk_frame = 0
+walking = False
+direction = "right"
+current_frame = 0
+last_update = 0
 # Other
 show_chatbar = False
 player_name = "Dev_01"
 
 
 def char(x, y):
+    global character
+    global last_update
+    global current_frame
+    now = pygame.time.get_ticks()
+    if not walking and direction == "left":
+        character = img.char_left
+    if not walking and direction == "right":
+        character = img.char_right
+    if not walking and direction == "up":
+        character = img.char_up
+    if not walking and direction == "down":
+        character = img.char_down
+    if walking:
+        if now - last_update > 200:
+            last_update = now
+            if current_frame >= 3:
+                current_frame = 0
+            current_frame += 1
+            if direction == "up":
+                character = img.char_up_walk.get(current_frame)
+            if direction == "down":
+                character = img.char_down_walk.get(current_frame)
+            if direction == "left":
+                character = img.char_left_walk.get(current_frame)
+            if direction == "right":
+                character = img.char_right_walk.get(current_frame)
+
     win.game_display.blit(character, (x, y))
 
 
@@ -81,30 +106,15 @@ def debug():
         if event.key == pygame.K_6:
             script = tl.text6.get(3)
             restore = 3
+        if event.key == pygame.K_a:
+            print(direction)
+            print(walking)
 
 
 #######################
 def pyupdate():
-    global walk_frame
-    global character
     global move
 
-    if walk_frame + 1 >= 4:
-        walk_frame = 0
-    if up:
-        walk_frame += 1
-        character = (img.char_up_walk[walk_frame//3])
-    if down:
-        walk_frame += 1
-        character = (img.char_down_walk[walk_frame//3])
-    if left:
-        walk_frame += 1
-        character = (img.char_right_walk[walk_frame//3])
-    elif right:
-        walk_frame += 1
-        character = (img.char_left_walk[walk_frame//3])
-    else:
-        character = facing
     if show_chatbar:
         chatbar()
         move = False
@@ -118,13 +128,7 @@ def game_loop():
     y = (win.display_height * 0.8)
     x_change = 0
     y_change = 0
-    global up
-    global down
-    global left
-    global right
-    global walk_frame
     global character
-    global facing
     global show_chatbar
     global move
     global event
@@ -132,6 +136,8 @@ def game_loop():
     global line_count
     global script
     global restore
+    global walking
+    global direction
 
     game_exit = False
 
@@ -141,7 +147,8 @@ def game_loop():
                 game_exit = True
 
             debug()
-    # Action / Interaction
+
+    # window
             global game_display
             global isfull
             if event.type == pygame.KEYDOWN:
@@ -153,6 +160,8 @@ def game_loop():
                     win.isfull = False
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
+
+    # Action / Interaction
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar:
                     show_chatbar = True
@@ -166,9 +175,6 @@ def game_loop():
                         move = False
                         line_count = restore
 
-                if event.key == pygame.K_c:
-                    print(script)
-                    print(line_count)
                 if event.key == pygame.K_v:
                     import frames.frame_4_fight
 
@@ -176,59 +182,39 @@ def game_loop():
             if event.type == pygame.KEYDOWN and move:
                 if event.key == pygame.K_LEFT:
                     x_change = -0.025
-                    up = False
-                    down = False
-                    left = False
-                    right = True
-                    facing = img.char_left
+                    walking = True
+                    direction = "left"
                     pygame.display.update()
+
                 elif event.key == pygame.K_RIGHT:
                     x_change = 0.025
-                    up = False
-                    down = False
-                    left = True
-                    right = False
-                    facing = img.char_right
+                    walking = True
+                    direction = "right"
                     pygame.display.update()
-                else:
-                    left = False
-                    right = False
-                    walk_frame = 0
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     x_change = 0
-                    left = False
-                    right = False
+                    walking = False
 
     # Up Down movement
             if event.type == pygame.KEYDOWN and move:
                 if event.key == pygame.K_UP:
                     y_change = -0.025
-                    up = True
-                    down = False
-                    left = False
-                    right = False
-                    facing = img.char_up
+                    walking = True
+                    direction = "up"
                     pygame.display.update()
+
                 elif event.key == pygame.K_DOWN:
                     y_change = 0.025
-                    up = False
-                    down = True
-                    left = False
-                    right = False
-                    facing = img.char_down
+                    walking = True
+                    direction = "down"
                     pygame.display.update()
-                else:
-                    up = False
-                    down = False
-                    walk_frame = 0
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     y_change = 0
-                    up = False
-                    down = False
+                    walking = False
 
     # End group
         win.game_display.fill(win.black)
