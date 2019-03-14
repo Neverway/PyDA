@@ -8,7 +8,7 @@ display_width = 800
 display_height = 600
 
 # Windows resolution
-game_display = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
+game_display = pygame.display.set_mode((display_width, display_height))
 
 # Windows name
 pygame.display.set_caption('Divine Annihilation')
@@ -24,4 +24,4 @@ red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
 
-isfull = True
+isfull = False
