@@ -34,14 +34,14 @@ saved_count = 1
 
 def delay():
     global last_update2
-    global zallow
+    global z_allow
     now = pygame.time.get_ticks()
     if zed:
         if now - last_update2 > 200:
             last_update2 = now
-            zallow = True
+            z_allow = True
     if not zed:
-            zallow = False
+            z_allow = False
 
 
 def char(x, y):
@@ -138,7 +138,6 @@ def game_loop():
     x_change = 0
     y_change = 0
 
-
     # Character
     global character
     global walking
@@ -151,10 +150,10 @@ def game_loop():
     global script
     global show_chatbar
     global zed
-    global zallow
+    global z_allow
     global line_count
 
-    zallow = False
+    z_allow = False
 
     game_exit = False
 
@@ -180,22 +179,28 @@ def game_loop():
 
     # Action / Interaction
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_z and not show_chatbar and not zallow:
+                if event.key == pygame.K_z and not show_chatbar and not z_allow:
                     show_chatbar = True
                     print("Show the cats!")
                     # Delay
                     zed = True
-                if event.key == pygame.K_z and show_chatbar and zallow:
+                if event.key == pygame.K_z and show_chatbar and z_allow:
                     line_count -= 1
-                    print(line_count)
                     print("Meow.")
-                if event.key == pygame.K_z and show_chatbar and zallow and line_count <= 0:
+                if event.key == pygame.K_z and show_chatbar and z_allow and line_count <= 0:
                     show_chatbar = False
                     line_count = saved_count
                     zed = False
 
+                if event.key == pygame.K_c:
+                    print("Render: ", render_text)
+                    print("Line: ", line_count)
+                    print("Saved: ", saved_count)
+                    print("Render: ", render_text)
+
                 if event.key == pygame.K_v:
                     import frames.frame_4_fight
+                    frames.frame_4_fight = frames.frame_4_fight
 
     # Left right movement
             if event.type == pygame.KEYDOWN and move:

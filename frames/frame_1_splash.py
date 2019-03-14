@@ -30,6 +30,7 @@ def splashan():
         last_splash_update = now
         if current_splash_frame >= 11:
             from frames import frame_2_main
+            frame_2_main = frame_2_main
         current_splash_frame += 1
         dasplash = img.splash.get(current_splash_frame)
     win.game_display.blit(dasplash, (200, 200))

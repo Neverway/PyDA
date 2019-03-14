@@ -3,7 +3,7 @@
 #   line 2 = Text id
 #   line 3 = Event (e = error, o = other, d = debug)
 #   line 4 = Line
-failsafe = {
+fail_safe = {
     0: "Text test failed successfully!"
 }
 text1 = {
@@ -39,8 +39,8 @@ bt_intro = {
 #    t = 0
 #    while True:
 #        t += 1
-#        showntext = text[0:t]
+#        shown_text = text[0:t]
 #        time.sleep(.25)
 #        if t >= 6:
 #            break
-#   text_surface = font.render(showntext, True, (255, 255, 255))
+#   text_surface = font.render(shown_text, True, (255, 255, 255))

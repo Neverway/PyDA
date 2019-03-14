@@ -33,7 +33,7 @@ def debug():
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_0:
             line_count = 1
-            script = tl.failsafe.get(line_count)
+            script = tl.fail_safe.get(line_count)
         if event.key == pygame.K_1:
             line_count = 1
             script = tl.text1.get(line_count)
@@ -90,6 +90,7 @@ def game_loop():
                 if event.key == pygame.K_z and menu_id == 1:
                     print("New Game")
                     from frames import frame_3_game
+                    frame_3_game = frame_3_game
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and menu_id == 2:
                     print("Load Game")
