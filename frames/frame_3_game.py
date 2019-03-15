@@ -202,6 +202,9 @@ def game_loop():
                     render_text = script
                     # Delay
                     zed = True
+                    x_change = 0
+                    y_change = 0
+                    walking = False
                 if event.key == pygame.K_z and show_chatbar and z_allow:
                     line_count -= 1
                     script = text(line_count)
@@ -265,8 +268,8 @@ def game_loop():
         y += y_change
         pyupdate()
         delay()
+        testent(125, 125)
         char(x, y)
-        testent(15, 15)
         hud_hp_shelf()
         pygame.display.update()
     clock.tick(30)
