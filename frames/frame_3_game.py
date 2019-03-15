@@ -1,5 +1,5 @@
 from Divine_Annihilation import *
-from files import text_lines as tl, win_config as win, img_load as img
+from files import text_lines as tl, img_load as img
 import os
 path = os.path.abspath("frames/retro.ttf")
 
@@ -30,6 +30,7 @@ last_update2 = 0
 zed = False
 line_count = 0
 saved_count = 1
+text = tl.fail_safe.get
 
 
 def delay():
@@ -101,22 +102,38 @@ def debug():
     global script
     global line_count
     global saved_count
+    global text
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_1:
             saved_count = 1
             line_count = 1
-            script = tl.text1.get(line_count)
+            text = tl.text1.get
+            script = text(line_count)
             render_text = script
         if event.key == pygame.K_2:
             saved_count = 1
             line_count = 1
-            script = tl.text2.get(line_count)
+            text = tl.text2.get
+            script = text(line_count)
             render_text = script
         if event.key == pygame.K_3:
             saved_count = 2
             line_count = 2
-            script = tl.text3.get(line_count)
+            text = tl.text3.get
+            script = text(line_count)
+            render_text = script
+        if event.key == pygame.K_4:
+            saved_count = 3
+            line_count = 3
+            text = tl.text4.get
+            script = text(line_count)
+            render_text = script
+        if event.key == pygame.K_5:
+            saved_count = 9
+            line_count = 9
+            text = tl.text5.get
+            script = text(line_count)
             render_text = script
 
 
@@ -181,12 +198,14 @@ def game_loop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar and not z_allow:
                     show_chatbar = True
-                    print("Show the cats!")
+                    script = text(line_count)
+                    render_text = script
                     # Delay
                     zed = True
                 if event.key == pygame.K_z and show_chatbar and z_allow:
                     line_count -= 1
-                    print("Meow.")
+                    script = text(line_count)
+                    render_text = script
                 if event.key == pygame.K_z and show_chatbar and z_allow and line_count <= 0:
                     show_chatbar = False
                     line_count = saved_count
@@ -205,13 +224,13 @@ def game_loop():
     # Left right movement
             if event.type == pygame.KEYDOWN and move:
                 if event.key == pygame.K_LEFT:
-                    x_change = -0.1
+                    x_change = -0.05
                     walking = True
                     direction = "left"
                     pygame.display.update()
 
                 elif event.key == pygame.K_RIGHT:
-                    x_change = 0.1
+                    x_change = 0.05
                     walking = True
                     direction = "right"
                     pygame.display.update()
@@ -224,13 +243,13 @@ def game_loop():
     # Up Down movement
             if event.type == pygame.KEYDOWN and move:
                 if event.key == pygame.K_UP:
-                    y_change = -0.1
+                    y_change = -0.05
                     walking = True
                     direction = "up"
                     pygame.display.update()
 
                 elif event.key == pygame.K_DOWN:
-                    y_change = 0.1
+                    y_change = 0.05
                     walking = True
                     direction = "down"
                     pygame.display.update()

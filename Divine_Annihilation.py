@@ -19,7 +19,6 @@ script = tl.fail_safe.get(1)
 render_text = script
 text_surface = font.render(render_text, True, (255, 255, 255))
 frame_1_splash = frame_1_splash
-win = win
 
 
 #######################
