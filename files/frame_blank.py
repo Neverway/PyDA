@@ -40,8 +40,6 @@ def pyupdate():
 def game_loop():
     game_exit = False
     global event
-    fdx = 0
-    fdxmv = True
     while not game_exit:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

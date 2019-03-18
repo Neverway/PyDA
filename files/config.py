@@ -2,7 +2,6 @@ import pygame
 from files import text_lines as tl, img_load as img
 import os
 path = os.path.abspath("frames/retro.ttf")
-
 global win
 
 pygame.init()

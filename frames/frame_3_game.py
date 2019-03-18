@@ -1,7 +1,5 @@
 from files.config import *
 
-
-
 # Character
 move = True
 character = img.char_right
