@@ -1,8 +1,6 @@
 from files.config import *
 
 player_name = "Dev_1"
-tl = tl
-img = img
 render_text2 = "An enemy draws near!"
 
 

@@ -2,6 +2,7 @@ from files.config import *
 
 # Font
 render_text2 = "Loading..."
+text_surface2 = font2.render(render_text2, False, (255, 255, 255))
 last_splash_update = 0
 current_splash_frame = 0
 dasplash = img.sp1
@@ -58,4 +59,3 @@ def game_loop():
 
 game_loop()
 pygame.quit()
-quit()

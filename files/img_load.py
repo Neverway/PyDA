@@ -77,3 +77,27 @@ test_entity = pygame.image.load('sprites/ent_testent.png')
 # Fight
 fight_back = pygame.image.load('sprites/back_fight_colorbar.png')
 fight_char = pygame.image.load('sprites/ent_fight_char.png')
+
+# Pause
+hud_party_member_1 = pygame.image.load('sprites/hud_party_member_1.png')
+hud_party_member_2 = pygame.image.load('sprites/hud_party_member_2.png')
+hud_party_member_3 = pygame.image.load('sprites/hud_party_member_3.png')
+hud_party_member_4 = pygame.image.load('sprites/hud_party_member_4.png')
+hud_party_inven_1 = pygame.image.load('sprites/hud_party_inven_1.png')
+hud_party_inven_2 = pygame.image.load('sprites/hud_party_inven_2.png')
+hud_party_inven_3 = pygame.image.load('sprites/hud_party_inven_3.png')
+hud_party_inven_4 = pygame.image.load('sprites/hud_party_inven_4.png')
+hud_party_inven_5 = pygame.image.load('sprites/hud_party_inven_5.png')
+hud_party_member = {
+    1: hud_party_member_1,
+    2: hud_party_member_2,
+    3: hud_party_member_3,
+    4: hud_party_member_4
+}
+hud_party_inven = {
+    1: hud_party_inven_1,
+    2: hud_party_inven_2,
+    3: hud_party_inven_3,
+    4: hud_party_inven_4,
+    5: hud_party_inven_5
+}

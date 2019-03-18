@@ -3,6 +3,7 @@ from files.config import win
 
 # Font
 render_text2 = "Version 0.0.3"
+text_surface2 = font2.render(render_text2, False, (255, 255, 255))
 menu_id = 1
 bar = img.new_game
 
