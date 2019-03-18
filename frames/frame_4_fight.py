@@ -66,12 +66,12 @@ def game_loop():
         win.fill(black)
         win.blit(img.fight_back, (fdx, 200))
         if fdxmv:
-            fdx -= .05
+            fdx -= 0.05
         if not fdxmv:
-            fdx += .05
-        if fdx == -500:
+            fdx += 0.05
+        if fdx <= -500:
             fdxmv = False
-        if fdx == 1:
+        if fdx >= 1:
             fdxmv = True
         pyupdate()
         pygame.display.update()
