@@ -1,18 +1,6 @@
-from Divine_Annihilation import *
-from files import text_lines as tl, img_load as img
-import os
-path = os.path.abspath("frames/retro.ttf")
+from files.config import *
 
-# This is important and needs to be first
-pygame.init()
-pygame.font.init()
-# Game font
 
-font = pygame.font.SysFont('Courier New', 20)
-font2 = pygame.font.Font(path, 12)
-
-render_text = script
-text_surface = font.render(render_text, True, (255, 255, 255))
 
 # Character
 move = True
@@ -73,27 +61,27 @@ def char(x, y):
             if direction == "right":
                 character = img.char_right_walk.get(current_frame)
 
-    win.game_display.blit(character, (x, y))
+    win.blit(character, (x, y))
 
 
 def hud_hp_shelf():
-    win.game_display.blit(img.hp_shelf, (0, 0))
+    win.blit(img.hp_shelf, (0, 0))
     name_text = font2.render(player_name, False, (255, 255, 255))
-    win.game_display.blit(name_text, (2, 4))
+    win.blit(name_text, (2, 4))
 
 
 def testent(x, y):
-    win.game_display.blit(img.test_entity, (x, y))
+    win.blit(img.test_entity, (x, y))
 
 
 def chat_text():
     global text_surface
     text_surface = font.render(render_text, True, (255, 255, 255))
-    win.game_display.blit(text_surface, (10, 483))
+    win.blit(text_surface, (10, 483))
 
 
 def chatbar():
-    win.game_display.blit(img.chtbar, (0, 473))
+    win.blit(img.chtbar, (0, 473))
     chat_text()
 
 
@@ -150,8 +138,8 @@ def pyupdate():
 
 
 def game_loop():
-    x = (win.display_width * 0.45)
-    y = (win.display_height * 0.8)
+    x = (display_width * 0.45)
+    y = (display_height * 0.8)
     x_change = 0
     y_change = 0
 
@@ -184,16 +172,16 @@ def game_loop():
     # window
             global game_display
             global isfull
+            global win
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F4 and not win.isfull:
-                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
-                    win.isfull = True
-                if event.key == pygame.K_F1 and win.isfull:
-                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
-                    win.isfull = False
+                if event.key == pygame.K_F4 and not isfull:
+                    isfull = True
+                    win = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
+                if event.key == pygame.K_F1 and isfull:
+                    isfull = False
+                    win = pygame.display.set_mode((display_width, display_height))
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
-
     # Action / Interaction
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and not show_chatbar and not z_allow:
@@ -263,7 +251,7 @@ def game_loop():
                     walking = False
 
     # End group
-        win.game_display.fill(win.black)
+        win.fill(black)
         x += x_change
         y += y_change
         pyupdate()

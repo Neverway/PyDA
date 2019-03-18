@@ -1,24 +1,15 @@
-from Divine_Annihilation import *
-from files import text_lines as tl, win_config as win, img_load as img
-import os
-path = os.path.abspath("frames/retro.ttf")
+from files.config import *
+from files.config import win
 
-# This is important and needs to be first
-pygame.init()
-pygame.font.init()
 # Font
 render_text2 = "Version 0.0.3"
-font2 = pygame.font.Font(path, 12)
-text_surface2 = font2.render(render_text2, False, (255, 255, 255))
-
 menu_id = 1
-
 bar = img.new_game
 
 
 def menu(x, y):
     global bar
-    win.game_display.blit(bar, (x, y))
+    win.blit(bar, (x, y))
     if menu_id == 1:
         bar = img.new_game
     if menu_id == 2:
@@ -49,17 +40,14 @@ def debug():
         if event.key == pygame.K_5:
             line_count = 2
             script = tl.text5.get(line_count)
-        if event.key == pygame.K_6:
-            line_count = 3
-            script = tl.text6.get(line_count)
 
 
 #######################
 def pyupdate():
     menu(350, 360)
-    win.game_display.blit(text_surface2, (10, 5))
-    win.game_display.blit(img.logo, (170, 250))
-    win.game_display.blit(img.cright, (600, 570))
+    win.blit(text_surface2, (10, 5))
+    win.blit(img.logo, (170, 250))
+    win.blit(img.cright, (600, 570))
 #######################
 
 
@@ -77,13 +65,14 @@ def game_loop():
     # Action / Interaction
             global game_display
             global isfull
+            global win
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F4 and not win.isfull:
-                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
-                    win.isfull = True
-                if event.key == pygame.K_F1 and win.isfull:
-                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
-                    win.isfull = False
+                if event.key == pygame.K_F4 and not isfull:
+                    isfull = True
+                    win = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
+                if event.key == pygame.K_F1 and isfull:
+                    isfull = False
+                    win = pygame.display.set_mode((display_width, display_height))
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
             if event.type == pygame.KEYDOWN:
@@ -119,7 +108,7 @@ def game_loop():
                     pass
 
     # End group
-        win.game_display.fill(win.black)
+        win.fill(black)
         pyupdate()
         pygame.display.update()
     clock.tick(30)

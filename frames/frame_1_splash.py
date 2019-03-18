@@ -1,22 +1,11 @@
-from Divine_Annihilation import *
-from files import text_lines as tl, win_config as win, img_load as img
-import os
-path = os.path.abspath("frames/retro.ttf")
+from files.config import *
 
-# This is important and needs to be first
-pygame.init()
-pygame.font.init()
-# Font
 # Font
 render_text2 = "Loading..."
-font2 = pygame.font.Font(path, 12)
-text_surface2 = font2.render(render_text2, False, (255, 255, 255))
 last_splash_update = 0
 current_splash_frame = 0
 dasplash = img.sp1
 loop = True
-
-tl = tl
 
 
 def splashan():
@@ -33,7 +22,7 @@ def splashan():
             frame_2_main = frame_2_main
         current_splash_frame += 1
         dasplash = img.splash.get(current_splash_frame)
-    win.game_display.blit(dasplash, (200, 200))
+    win.blit(dasplash, (200, 200))
 
 
 def debug():
@@ -43,7 +32,7 @@ def debug():
 #######################
 def pyupdate():
     splashan()
-    win.game_display.blit(text_surface2, (600, 570))
+    win.blit(text_surface2, (600, 570))
     pygame.display.update()
 
 #######################
@@ -62,7 +51,7 @@ def game_loop():
                 from frames import frame_2_main
 
     # End group
-        win.game_display.fill(win.black)
+        win.fill(black)
         pygame.mouse.set_visible(False)
         pyupdate()
 

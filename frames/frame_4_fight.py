@@ -1,16 +1,4 @@
-from Divine_Annihilation import *
-from files import text_lines as tl, win_config as win, img_load as img
-import os
-path = os.path.abspath("frames/retro.ttf")
-
-# This is important and needs to be first
-pygame.init()
-pygame.font.init()
-# Game font
-
-font = pygame.font.SysFont('Courier New', 20)
-font2 = pygame.font.Font(path, 12)
-font3 = pygame.font.Font(path, 16)
+from files.config import *
 
 player_name = "Dev_1"
 tl = tl
@@ -19,24 +7,24 @@ render_text2 = "An enemy draws near!"
 
 
 def hud_hp_shelf():
-    win.game_display.blit(img.hp_shelf, (0, 0))
+    win.blit(img.hp_shelf, (0, 0))
     name_text = font2.render(player_name, False, (255, 255, 255))
-    win.game_display.blit(name_text, (2, 4))
+    win.blit(name_text, (2, 4))
 
 
 def chat_text():
     global text_surface
     text_surface = font3.render(render_text2, False, (255, 255, 255))
-    win.game_display.blit(text_surface, (10, 483))
+    win.blit(text_surface, (10, 483))
 
 
 def chatbar():
-    win.game_display.blit(img.chtbar, (0, 473))
+    win.blit(img.chtbar, (0, 473))
     chat_text()
 
 
 def char(x, y):
-    win.game_display.blit(img.fight_char, (x, y))
+    win.blit(img.fight_char, (x, y))
 
 
 def debug():
@@ -62,22 +50,21 @@ def game_loop():
                 game_exit = True
 
             global isfull
-
+            global win
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F4 and not win.isfull:
-                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height), pygame.FULLSCREEN)
-                    win.isfull = True
-                if event.key == pygame.K_F1 and win.isfull:
-                    win.game_display = pygame.display.set_mode((win.display_width, win.display_height))
-                    win.isfull = False
+                if event.key == pygame.K_F4 and not isfull:
+                    isfull = True
+                    win = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
+                if event.key == pygame.K_F1 and isfull:
+                    isfull = False
+                    win = pygame.display.set_mode((display_width, display_height))
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
-
             debug()
 
     # End group
-        win.game_display.fill(win.black)
-        win.game_display.blit(img.fight_back, (fdx, 200))
+        win.fill(black)
+        win.blit(img.fight_back, (fdx, 200))
         if fdxmv:
             fdx -= .05
         if not fdxmv:
