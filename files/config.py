@@ -43,3 +43,4 @@ line_count = 1
 script = tl.fail_safe.get(1)
 render_text = script
 text_surface = font.render(render_text, True, (255, 255, 255))
+
