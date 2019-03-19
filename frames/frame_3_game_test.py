@@ -62,6 +62,36 @@ def char(x, y):
     win.blit(character, (x, y))
 
 
+def action_interaction():
+    global show_chatbar
+    global script
+    global line_count
+    global render_text
+    global zed
+    global walking
+
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_z and not show_chatbar and not z_allow:
+            show_chatbar = True
+            script = text(line_count)
+            render_text = script
+            # Delay
+            zed = True
+            x_change = 0
+            y_change = 0
+            walking = False
+        if event.key == pygame.K_z and show_chatbar and z_allow:
+            line_count -= 1
+            script = text(line_count)
+            render_text = script
+        if event.key == pygame.K_z and show_chatbar and z_allow and line_count <= 0:
+            show_chatbar = False
+            line_count = saved_count
+            zed = False
+        if event.key == pygame.K_m:
+            walking = False
+
+
 def hud_hp_shelf():
     win.blit(img.hp_shelf, (0, 0))
     name_text = font2.render(player_name, False, (255, 255, 255))
@@ -77,46 +107,6 @@ def chat_text():
     global text_surface
     text_surface = font.render(render_text, True, (255, 255, 255))
     win.blit(text_surface, (10, 483))
-
-
-def char_movement_controls():
-    # Left right movement
-            if event.type == pygame.KEYDOWN and move:
-                if event.key == pygame.K_LEFT:
-                    x_change = -0.05
-                    walking = True
-                    direction = "left"
-                    pygame.display.update()
-
-                elif event.key == pygame.K_RIGHT:
-                    x_change = 0.05
-                    walking = True
-                    direction = "right"
-                    pygame.display.update()
-
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    x_change = 0
-                    walking = False
-
-    # Up Down movement
-            if event.type == pygame.KEYDOWN and move:
-                if event.key == pygame.K_UP:
-                    y_change = -0.05
-                    walking = True
-                    direction = "up"
-                    pygame.display.update()
-
-                elif event.key == pygame.K_DOWN:
-                    y_change = 0.05
-                    walking = True
-                    direction = "down"
-                    pygame.display.update()
-
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    y_change = 0
-                    walking = False
 
 
 def chatbar():
@@ -189,13 +179,7 @@ def game_loop():
     global move
 
     global event
-
-    global render_text
-    global script
-    global show_chatbar
-    global zed
     global z_allow
-    global line_count
 
     z_allow = False
 
@@ -220,37 +204,53 @@ def game_loop():
                     win = pygame.display.set_mode((display_width, display_height))
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
-    # Action / Interaction
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_z and not show_chatbar and not z_allow:
-                    show_chatbar = True
-                    script = text(line_count)
-                    render_text = script
-                    # Delay
-                    zed = True
+
+                action_interaction()
+
+                # Left right movement
+            if event.type == pygame.KEYDOWN and move:
+                if event.key == pygame.K_LEFT:
+                    x_change = -0.05
+                    walking = True
+                    direction = "left"
+                    pygame.display.update()
+
+                elif event.key == pygame.K_RIGHT:
+                    x_change = 0.05
+                    walking = True
+                    direction = "right"
+                    pygame.display.update()
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    print("f")
                     x_change = 0
+                    walking = False
+
+                # Up Down movement
+            if event.type == pygame.KEYDOWN and move:
+                if event.key == pygame.K_UP:
+                    y_change = -0.05
+                    walking = True
+                    direction = "up"
+                    pygame.display.update()
+
+                elif event.key == pygame.K_DOWN:
+                    y_change = 0.05
+                    walking = True
+                    direction = "down"
+                    pygame.display.update()
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     y_change = 0
                     walking = False
-                if event.key == pygame.K_z and show_chatbar and z_allow:
-                    line_count -= 1
-                    script = text(line_count)
-                    render_text = script
-                if event.key == pygame.K_z and show_chatbar and z_allow and line_count <= 0:
-                    show_chatbar = False
-                    line_count = saved_count
-                    zed = False
 
-                if event.key == pygame.K_c:
-                    print("Render: ", render_text)
-                    print("Line: ", line_count)
-                    print("Saved: ", saved_count)
-                    print("Render: ", render_text)
+            if event.key == pygame.K_v:
+                import frames.frame_4_fight
+                frames.frame_4_fight = frames.frame_4_fight
 
-                if event.key == pygame.K_v:
-                    import frames.frame_4_fight
-                    frames.frame_4_fight = frames.frame_4_fight
 
-            char_movement_controls()
 
     # End group
         win.fill(black)

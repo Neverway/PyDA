@@ -1,0 +1,40 @@
+def char_movement_controls(x_change, y_change, walking):
+    global character
+    global direction
+    global move
+# Left right movement
+    if event.type == pygame.KEYDOWN and move:
+        if event.key == pygame.K_LEFT:
+            x_change = -0.05
+            walking = True
+            direction = "left"
+            pygame.display.update()
+
+        elif event.key == pygame.K_RIGHT:
+            x_change = 0.05
+            walking = True
+            direction = "right"
+            pygame.display.update()
+
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+            x_change = 0
+            walking = False
+
+    if event.type == pygame.KEYDOWN and move:
+        if event.key == pygame.K_UP:
+            y_change = -0.05
+            walking = True
+            direction = "up"
+            pygame.display.update()
+
+        elif event.key == pygame.K_DOWN:
+            y_change = 0.05
+            walking = True
+            direction = "down"
+            pygame.display.update()
+
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+            y_change = 0
+            walking = False
