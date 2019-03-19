@@ -79,7 +79,7 @@ def game_loop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and menu_id == 1:
                     print("New Game")
-                    from frames import frame_3_game_test
+                    import frames.frame_3_game_test
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z and menu_id == 2:
                     print("Load Game")
@@ -116,4 +116,3 @@ def game_loop():
 
 game_loop()
 pygame.quit()
-quit()

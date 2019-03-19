@@ -31,65 +31,68 @@ def delay():
             z_allow = False
 
 
-def char(x, y):
-    global character
-    global last_update
-    global current_frame
-    now = pygame.time.get_ticks()
-    if not walking and direction == "left":
-        character = img.char_left
-    if not walking and direction == "right":
-        character = img.char_right
-    if not walking and direction == "up":
-        character = img.char_up
-    if not walking and direction == "down":
-        character = img.char_down
-    if walking:
-        if now - last_update > 200:
-            last_update = now
-            if current_frame >= 3:
-                current_frame = 0
-            current_frame += 1
-            if direction == "up":
-                character = img.char_up_walk.get(current_frame)
-            if direction == "down":
-                character = img.char_down_walk.get(current_frame)
-            if direction == "left":
-                character = img.char_left_walk.get(current_frame)
-            if direction == "right":
-                character = img.char_right_walk.get(current_frame)
+class PlayerCharacter:
+    def char(self, x, y):
+        global character
+        global last_update
+        global current_frame
+        now = pygame.time.get_ticks()
+        if not walking and direction == "left":
+            character = img.char_left
+        if not walking and direction == "right":
+            character = img.char_right
+        if not walking and direction == "up":
+            character = img.char_up
+        if not walking and direction == "down":
+            character = img.char_down
+        if walking:
+            if now - last_update > 200:
+                last_update = now
+                if current_frame >= 3:
+                    current_frame = 0
+                current_frame += 1
+                if direction == "up":
+                    character = img.char_up_walk.get(current_frame)
+                if direction == "down":
+                    character = img.char_down_walk.get(current_frame)
+                if direction == "left":
+                    character = img.char_left_walk.get(current_frame)
+                if direction == "right":
+                    character = img.char_right_walk.get(current_frame)
 
-    win.blit(character, (x, y))
+        win.blit(character, (x, y))
+
+    def action_interaction(self):
+        global show_chatbar
+        global script
+        global line_count
+        global render_text
+        global zed
+        global walking
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_z and not show_chatbar and not z_allow:
+                show_chatbar = True
+                script = text(line_count)
+                render_text = script
+                # Delay
+                zed = True
+                x_change = 0
+                y_change = 0
+                walking = False
+            if event.key == pygame.K_z and show_chatbar and z_allow:
+                line_count -= 1
+                script = text(line_count)
+                render_text = script
+            if event.key == pygame.K_z and show_chatbar and z_allow and line_count <= 0:
+                show_chatbar = False
+                line_count = saved_count
+                zed = False
+            if event.key == pygame.K_m:
+                walking = False
 
 
-def action_interaction():
-    global show_chatbar
-    global script
-    global line_count
-    global render_text
-    global zed
-    global walking
 
-    if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_z and not show_chatbar and not z_allow:
-            show_chatbar = True
-            script = text(line_count)
-            render_text = script
-            # Delay
-            zed = True
-            x_change = 0
-            y_change = 0
-            walking = False
-        if event.key == pygame.K_z and show_chatbar and z_allow:
-            line_count -= 1
-            script = text(line_count)
-            render_text = script
-        if event.key == pygame.K_z and show_chatbar and z_allow and line_count <= 0:
-            show_chatbar = False
-            line_count = saved_count
-            zed = False
-        if event.key == pygame.K_m:
-            walking = False
 
 
 def hud_hp_shelf():
@@ -177,12 +180,10 @@ def game_loop():
     global walking
     global direction
     global move
-
     global event
     global z_allow
 
     z_allow = False
-
     game_exit = False
 
     while not game_exit:
@@ -205,7 +206,7 @@ def game_loop():
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
 
-                action_interaction()
+                PlayerCharacter.action_interaction(character)
 
                 # Left right movement
             if event.type == pygame.KEYDOWN and move:
@@ -223,7 +224,6 @@ def game_loop():
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    print("f")
                     x_change = 0
                     walking = False
 
@@ -246,11 +246,8 @@ def game_loop():
                     y_change = 0
                     walking = False
 
-            if event.key == pygame.K_v:
+            if event.type == pygame.K_v:
                 import frames.frame_4_fight
-                frames.frame_4_fight = frames.frame_4_fight
-
-
 
     # End group
         win.fill(black)
@@ -259,7 +256,7 @@ def game_loop():
         pyupdate()
         delay()
         testent(125, 125)
-        char(x, y)
+        PlayerCharacter.char(character, x, y)
         hud_hp_shelf()
         pygame.display.update()
     clock.tick(30)
@@ -267,11 +264,3 @@ def game_loop():
 
 game_loop()
 pygame.quit()
-quit()
-
-#def chit():
-#    global text_surface
-#    if event.type == CHITCHAT:
-#        text_surface = font.render(render_text, True, (255, 255, 255))
-#        win.blit(img.chtbar, (0, 473))
-#        win.blit(text_surface, (10, 483))

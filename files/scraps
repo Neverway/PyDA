@@ -38,3 +38,10 @@ def char_movement_controls(x_change, y_change, walking):
         if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
             y_change = 0
             walking = False
+
+# def chit():
+#    global text_surface
+#    if event.type == CHITCHAT:
+#        text_surface = font.render(render_text, True, (255, 255, 255))
+#        win.blit(img.chtbar, (0, 473))
+#        win.blit(text_surface, (10, 483))
