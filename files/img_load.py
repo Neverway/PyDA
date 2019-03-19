@@ -77,6 +77,15 @@ test_entity = pygame.image.load('sprites/ent_testent.png')
 # Fight
 fight_back = pygame.image.load('sprites/back_fight_colorbar.png')
 fight_char = pygame.image.load('sprites/ent_fight_char.png')
+fight_button_fight = pygame.image.load('sprites/hud_fight_button_1.png')
+fight_button_act = pygame.image.load('sprites/hud_fight_button_2.png')
+fight_button_inven = pygame.image.load('sprites/hud_fight_button_3.png')
+fight_buttons = {
+    1: fight_button_fight,
+    2: fight_button_act,
+    3: fight_button_inven
+}
+
 
 # Pause
 hud_party_member_1 = pygame.image.load('sprites/hud_party_member_1.png')
@@ -100,4 +109,14 @@ hud_party_inven = {
     3: hud_party_inven_3,
     4: hud_party_inven_4,
     5: hud_party_inven_5
+}
+
+# Tutorial
+cover = pygame.image.load('sprites/tut_book_read_1.png')
+page0 = pygame.image.load('sprites/tut_book_read_2.png')
+page1 = pygame.image.load('sprites/tut_book_read_3.png')
+tut_read = {
+    1: cover,
+    2: page0,
+    3: page1
 }

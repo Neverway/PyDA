@@ -73,6 +73,7 @@ def testent(x, y):
 
 
 def chat_text():
+
     global text_surface
     text_surface = font.render(render_text, True, (255, 255, 255))
     win.blit(text_surface, (10, 483))
@@ -166,7 +167,6 @@ def game_loop():
                 game_exit = True
 
             debug()
-
     # window
             global game_display
             global isfull

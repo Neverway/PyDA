@@ -4,6 +4,8 @@ player_name = "Dev_1"
 tl = tl
 img = img
 render_text2 = "An enemy draws near!"
+main_buttons = True
+current_button = 1
 
 
 def hud_hp_shelf():
@@ -19,7 +21,10 @@ def chat_text():
 
 
 def chatbar():
+    global current_button
     win.blit(img.chtbar, (0, 473))
+    fight_button = img.fight_buttons.get(current_button)
+    win.blit(img.fight_buttons.get(current_button), (0, 445))
     chat_text()
 
 
@@ -42,6 +47,7 @@ def pyupdate():
 def game_loop():
     game_exit = False
     global event
+    global current_button
     fdx = 0
     fdxmv = True
     while not game_exit:
@@ -60,7 +66,23 @@ def game_loop():
                     win = pygame.display.set_mode((display_width, display_height))
                 if event.key == pygame.K_ESCAPE:
                     game_exit = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT and main_buttons:
+                    current_button += 1
+                    if current_button == 4:
+                        current_button = 1
+                    fight_button = img.fight_buttons.get(current_button)
+                    win.blit(img.fight_buttons.get(current_button), (0, 445))
+                if event.key == pygame.K_LEFT and main_buttons:
+                    current_button -= 1
+                    if current_button == 0:
+                        current_button = 3
+                    fight_button = img.fight_buttons.get(current_button)
+                    win.blit(img.fight_buttons.get(current_button), (0, 445))
+                if event.key == pygame.K_b:
+                    print(current_button)
             debug()
+
 
     # End group
         win.fill(black)
