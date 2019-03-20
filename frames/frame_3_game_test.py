@@ -9,6 +9,7 @@ current_frame = 0
 last_update = 0
 # Other
 player_name = "Dev_01"
+devmode = False
 
 # Text
 show_chatbar = False
@@ -91,82 +92,77 @@ class PlayerCharacter:
             if event.key == pygame.K_m:
                 walking = False
 
+    def devcontrol(self):
+        global render_text
+        global script
+        global line_count
+        global saved_count
+        global text
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_AMPERSAND:
+                print("DEVMODE ENABLED")
+
+        if event.type == pygame.KEYDOWN and devmode:
+            if event.key == pygame.K_1:
+                saved_count = 1
+                line_count = 1
+                text = tl.text1.get
+                script = text(line_count)
+                render_text = script
+            if event.key == pygame.K_2:
+                saved_count = 1
+                line_count = 1
+                text = tl.text2.get
+                script = text(line_count)
+                render_text = script
+            if event.key == pygame.K_3:
+                saved_count = 2
+                line_count = 2
+                text = tl.text3.get
+                script = text(line_count)
+                render_text = script
+            if event.key == pygame.K_4:
+                saved_count = 3
+                line_count = 3
+                text = tl.text4.get
+                script = text(line_count)
+                render_text = script
+            if event.key == pygame.K_5:
+                saved_count = 9
+                line_count = 9
+                text = tl.text5.get
+                script = text(line_count)
+                render_text = script
 
 
+class PlayerHud:
+    def hud_hp_shelf(self):
+        win.blit(img.hp_shelf, (0, 0))
+        name_text = font2.render(player_name, False, (255, 255, 255))
+        win.blit(name_text, (2, 4))
 
+    def chat_text(self):
+        global text_surface
+        text_surface = font.render(render_text, True, (255, 255, 255))
+        win.blit(text_surface, (10, 483))
 
-def hud_hp_shelf():
-    win.blit(img.hp_shelf, (0, 0))
-    name_text = font2.render(player_name, False, (255, 255, 255))
-    win.blit(name_text, (2, 4))
+    def chatbar(self):
+        win.blit(img.chtbar, (0, 473))
+        self.chat_text()
 
 
 def testent(x, y):
     win.blit(img.test_entity, (x, y))
 
 
-def chat_text():
-
-    global text_surface
-    text_surface = font.render(render_text, True, (255, 255, 255))
-    win.blit(text_surface, (10, 483))
-
-
-def chatbar():
-    win.blit(img.chtbar, (0, 473))
-    chat_text()
-
-
-def debug():
-    global render_text
-    global script
-    global line_count
-    global saved_count
-    global text
-
-    if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_1:
-            saved_count = 1
-            line_count = 1
-            text = tl.text1.get
-            script = text(line_count)
-            render_text = script
-        if event.key == pygame.K_2:
-            saved_count = 1
-            line_count = 1
-            text = tl.text2.get
-            script = text(line_count)
-            render_text = script
-        if event.key == pygame.K_3:
-            saved_count = 2
-            line_count = 2
-            text = tl.text3.get
-            script = text(line_count)
-            render_text = script
-        if event.key == pygame.K_4:
-            saved_count = 3
-            line_count = 3
-            text = tl.text4.get
-            script = text(line_count)
-            render_text = script
-        if event.key == pygame.K_5:
-            saved_count = 9
-            line_count = 9
-            text = tl.text5.get
-            script = text(line_count)
-            render_text = script
-
-
-#######################
 def pyupdate():
     global move
 
     if show_chatbar:
-        chatbar()
+        PlayerHud.chatbar(character)
         move = False
     if not show_chatbar:
         move = True
-#######################
 
 
 def game_loop():
@@ -191,7 +187,7 @@ def game_loop():
             if event.type == pygame.QUIT:
                 game_exit = True
 
-            debug()
+            PlayerCharacter.devcontrol(character)
     # window
             global game_display
             global isfull
@@ -257,10 +253,11 @@ def game_loop():
         delay()
         testent(125, 125)
         PlayerCharacter.char(character, x, y)
-        hud_hp_shelf()
+        PlayerHud.hud_hp_shelf(character)
         pygame.display.update()
     clock.tick(30)
 
 
 game_loop()
 pygame.quit()
+quit()
