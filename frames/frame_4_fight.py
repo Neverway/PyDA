@@ -29,18 +29,23 @@ def hud_hp_shelf():
     win.blit(name_text, (2, 4))
 
 
-def chat_text():
-    global text_surface
-    text_surface = font3.render(render_text2, False, (255, 255, 255))
-    win.blit(text_surface, (10, 483))
+class PlayerHud:
+    def hud_hp_shelf(self):
+        win.blit(img.hp_shelf, (0, 0))
+        name_text = font2.render(player_name, False, (255, 255, 255))
+        win.blit(name_text, (2, 4))
 
+    def chat_text(self):
+        global text_surface
+        text_surface = font.render(render_text2, True, (255, 255, 255))
+        win.blit(text_surface, (10, 483))
 
-def chatbar():
-    global current_button
-    win.blit(img.chtbar, (0, 473))
-    fight_button = img.fight_buttons.get(current_button)
-    win.blit(img.fight_buttons.get(current_button), (0, 445))
-    chat_text()
+    def chatbar(self):
+        global current_button
+        win.blit(img.chtbar, (0, 473))
+        fight_button = img.fight_buttons.get(current_button)
+        win.blit(img.fight_buttons.get(current_button), (0, 445))
+        PlayerHud.chat_text(self)
 
 
 def char(x, y):
@@ -52,9 +57,9 @@ def debug():
 
 
 def pyupdate():
-    chatbar()
+    PlayerHud.chatbar(PlayerHud)
     char(15, 200)
-    hud_hp_shelf()
+    PlayerHud.hud_hp_shelf(PlayerHud)
 
 
 def game_loop():
