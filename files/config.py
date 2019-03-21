@@ -1,5 +1,5 @@
 import pygame
-from files import text_lines as tl, img_load as img
+from files import text_lines as tl, img_load as img, snd_load as snd
 import os
 path = os.path.abspath("frames/retro.ttf")
 global win

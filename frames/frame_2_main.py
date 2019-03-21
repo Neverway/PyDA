@@ -19,6 +19,49 @@ def menu(x, y):
         bar = img.quit_game
 
 
+def menu_control():
+    global menu_id
+    global game_display
+    global isfull
+    global win
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_F4 and not isfull:
+                    isfull = True
+                    win = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
+        if event.key == pygame.K_F1 and isfull:
+                    isfull = False
+                    win = pygame.display.set_mode((display_width, display_height))
+        if event.key == pygame.K_ESCAPE:
+            game_exit = True
+        if event.key == pygame.K_z and menu_id == 1:
+                    snd.menu_select.play()
+                    print("New Game")
+                    import frames.frame_3_game_test
+        if event.key == pygame.K_z and menu_id == 2:
+                    snd.menu_select.play()
+                    print("Load Game")
+        if event.key == pygame.K_z and menu_id == 3:
+                    snd.menu_select.play()
+                    game_exit = True
+        if event.key == pygame.K_c:
+            pass
+    # Up Down movement
+    if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    menu_id -= 1
+                    pygame.display.update()
+                if event.key == pygame.K_UP and menu_id < 1:
+                    menu_id = 3
+                elif event.key == pygame.K_DOWN:
+                    menu_id += 1
+                if event.key == pygame.K_DOWN and menu_id > 3:
+                    menu_id = 1
+                    pygame.display.update()
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+            print("none")
+
+
 def debug():
     global line_count
     global script
@@ -43,13 +86,11 @@ def debug():
             script = tl.text5.get(line_count)
 
 
-#######################
 def pyupdate():
     menu(350, 360)
     win.blit(text_surface2, (10, 5))
     win.blit(img.logo, (170, 250))
     win.blit(img.cright, (600, 570))
-#######################
 
 
 def game_loop():
@@ -63,49 +104,7 @@ def game_loop():
                 game_exit = True
 
             debug()
-    # Action / Interaction
-            global game_display
-            global isfull
-            global win
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F4 and not isfull:
-                    isfull = True
-                    win = pygame.display.set_mode((display_width, display_height), pygame.FULLSCREEN)
-                if event.key == pygame.K_F1 and isfull:
-                    isfull = False
-                    win = pygame.display.set_mode((display_width, display_height))
-                if event.key == pygame.K_ESCAPE:
-                    game_exit = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_z and menu_id == 1:
-                    print("New Game")
-                    import frames.frame_3_game_test
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_z and menu_id == 2:
-                    print("Load Game")
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_z and menu_id == 3:
-                    game_exit = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
-                    print(menu_id)
-
-    # Up Down movement
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    menu_id -= 1
-                    pygame.display.update()
-                if event.key == pygame.K_UP and menu_id < 1:
-                    menu_id = 3
-                elif event.key == pygame.K_DOWN:
-                    menu_id += 1
-                if event.key == pygame.K_DOWN and menu_id > 3:
-                    menu_id = 1
-                    pygame.display.update()
-
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    pass
+            menu_control()
 
     # End group
         win.fill(black)
