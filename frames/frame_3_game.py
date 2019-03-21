@@ -124,7 +124,6 @@ def debug():
             render_text = script
 
 
-#######################
 def pyupdate():
     global move
 
@@ -133,7 +132,6 @@ def pyupdate():
         move = False
     if not show_chatbar:
         move = True
-#######################
 
 
 def game_loop():
@@ -141,24 +139,19 @@ def game_loop():
     y = (display_height * 0.8)
     x_change = 0
     y_change = 0
-
     # Character
     global character
     global walking
     global direction
     global move
-
     global event
-
     global render_text
     global script
     global show_chatbar
     global zed
     global z_allow
     global line_count
-
     z_allow = False
-
     game_exit = False
 
     while not game_exit:

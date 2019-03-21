@@ -8,6 +8,21 @@ main_buttons = True
 current_button = 1
 
 
+class Decor:
+    def backbar(self):
+        global fdx
+        global fdxmv
+        win.blit(img.fight_back, (fdx, 200))
+        if fdxmv:
+            fdx -= 0.05
+        if not fdxmv:
+            fdx += 0.05
+        if fdx <= -500:
+            fdxmv = False
+        if fdx >= 1:
+            fdxmv = True
+
+
 def hud_hp_shelf():
     win.blit(img.hp_shelf, (0, 0))
     name_text = font2.render(player_name, False, (255, 255, 255))
@@ -36,20 +51,21 @@ def debug():
     pass
 
 
-#######################
 def pyupdate():
     chatbar()
     char(15, 200)
     hud_hp_shelf()
-#######################
 
 
 def game_loop():
     game_exit = False
     global event
     global current_button
+    global fdx
+    global fdxmv
     fdx = 0
     fdxmv = True
+
     while not game_exit:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -86,15 +102,7 @@ def game_loop():
 
     # End group
         win.fill(black)
-        win.blit(img.fight_back, (fdx, 200))
-        if fdxmv:
-            fdx -= 0.05
-        if not fdxmv:
-            fdx += 0.05
-        if fdx <= -500:
-            fdxmv = False
-        if fdx >= 1:
-            fdxmv = True
+        Decor.backbar(Decor)
         pyupdate()
         pygame.display.update()
     clock.tick(30)

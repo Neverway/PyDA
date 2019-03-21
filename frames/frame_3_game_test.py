@@ -138,6 +138,8 @@ class PlayerCharacter:
                 text = tl.text5.get
                 script = text(line_count)
                 render_text = script
+            if event.key == pygame.K_v:
+                import frames.frame_4_fight
 
     def devtext(self):
         if devmode:
