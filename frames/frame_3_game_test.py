@@ -98,9 +98,14 @@ class PlayerCharacter:
         global line_count
         global saved_count
         global text
+        global devmode
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_AMPERSAND:
-                print("DEVMODE ENABLED")
+            if event.key == pygame.K_BACKQUOTE and not devmode:
+                devmode = True
+                print("Developer mode has been enabled")
+            if event.key == pygame.K_F12 and devmode:
+                devmode = False
+                print("Developer mode has been disabled")
 
         if event.type == pygame.KEYDOWN and devmode:
             if event.key == pygame.K_1:
@@ -134,6 +139,23 @@ class PlayerCharacter:
                 script = text(line_count)
                 render_text = script
 
+    def devtext(self):
+        if devmode:
+            devtxt = font2.render("Developer Mode Enabled", False, (0, 255, 255))
+            l0 = font2.render("------------------------", False, (0, 255, 255))
+            l1 = font2.render("[1]-[5] Script = Test string 1-5", False, (200, 57, 10))
+            l2 = font2.render("[F4] Enter full screen", False, (200, 57, 10))
+            l3 = font2.render("[F1] Exit full screen", False, (200, 57, 10))
+            l4 = font2.render("[ESC] End Program", False, (200, 57, 10))
+            l5 = font2.render("[V] Jump to fight frame", False, (200, 57, 10))
+            win.blit(devtxt, (2, 40))
+            win.blit(l0, (2, 50))
+            win.blit(l1, (2, 65))
+            win.blit(l2, (2, 80))
+            win.blit(l3, (2, 95))
+            win.blit(l4, (2, 110))
+            win.blit(l5, (2, 125))
+
 
 class PlayerHud:
     def hud_hp_shelf(self):
@@ -148,7 +170,7 @@ class PlayerHud:
 
     def chatbar(self):
         win.blit(img.chtbar, (0, 473))
-        self.chat_text()
+        PlayerHud.chat_text(self)
 
 
 def testent(x, y):
@@ -254,6 +276,7 @@ def game_loop():
         testent(125, 125)
         PlayerCharacter.char(character, x, y)
         PlayerHud.hud_hp_shelf(character)
+        PlayerCharacter.devtext(character)
         pygame.display.update()
     clock.tick(30)
 
