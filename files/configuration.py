@@ -49,7 +49,6 @@ def frame_2(display):
             if event.type == pygame.QUIT:
                 game_exit = True
                 quit()
-            print("Snakes.")
 
         pressed_keys = pygame.key.get_pressed()
         player.update(pressed_keys)
