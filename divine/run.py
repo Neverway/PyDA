@@ -3,10 +3,13 @@ import logging
 import pygame
 from pygame.locals import *
 
+from divine.loaders import images as img
+from files import configuration as conf
 
 log = logging.getLogger(__name__)
 log.addHandler(logging.NullHandler())
 clock = pygame.time.Clock()
+character_image = img.char_right
 
 
 def create_surface():
@@ -16,21 +19,24 @@ def create_surface():
 class Mob(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load('loaders/resources/sprites/ent_char_right.png').convert()
+        self.image = character_image.convert()
         self.image.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.image.get_rect()
 
 
 class Player(Mob):
     def update(self, pressed_keys):
+        global character_image
         if pressed_keys[K_UP]:
-            self.rect.move_ip(0, -5)
+            self.rect.move_ip(0, -2)
+            character_image = img.char_up
         if pressed_keys[K_DOWN]:
-            self.rect.move_ip(0, 5)
+            self.rect.move_ip(0, 2)
+            character_image = img.char_down
         if pressed_keys[K_LEFT]:
-            self.rect.move_ip(-5, 0)
+            self.rect.move_ip(-2, 0)
         if pressed_keys[K_RIGHT]:
-            self.rect.move_ip(5, 0)
+            self.rect.move_ip(2, 0)
 
 
 def create_display(height=600, width=800, title=True):
@@ -50,25 +56,6 @@ def create_display(height=600, width=800, title=True):
     return display
 
 
-def game_loop(display):
-    game_exit = False
-    player = Player()
-    background = pygame.Surface(display.get_size())
-    background.fill((0, 0, 0))
-    while not game_exit:
-        for event in pygame.event.get():
-            log.debug(event)
-            if event.type == pygame.QUIT:
-                game_exit = True
-
-        pressed_keys = pygame.key.get_pressed()
-        player.update(pressed_keys)
-        display.blit(player.image, player.rect)
-        pygame.display.flip()
-        display.blit(background, (0, 0))
-        clock.tick(30)
-
-
 def main():
     """Run the program."""
     # Set window resolution
@@ -77,9 +64,8 @@ def main():
 
     pygame.init()
     display = create_display(display_height, display_width, 'Divine')
-    game_loop(display)
+    conf.frame_1(display)
     pygame.quit()
-
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
