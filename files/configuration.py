@@ -5,6 +5,12 @@ last_splash_update = 0
 current_splash_frame = 0
 dasplash = img.sp1
 
+# Font
+render_text2 = "Version 0.0.3"
+text_surface2 = font.render(render_text2, False, (255, 255, 255))
+menu_id = 1
+bar = img.new_game
+
 
 # Define functions
 def splashan(display):
@@ -20,6 +26,17 @@ def splashan(display):
         current_splash_frame += 1
         dasplash = img.splash.get(current_splash_frame)
     display.blit(dasplash, (200, 200))
+
+
+def menu(display, x, y):
+    global bar
+    display.blit(bar, (x, y))
+    if menu_id == 1:
+        bar = img.new_game
+    if menu_id == 2:
+        bar = img.load_game
+    if menu_id == 3:
+        bar = img.quit_game
 
 
 # Frames
@@ -45,7 +62,6 @@ def frame_1(display):
 
 def frame_2(display):
     game_exit = False
-    player = Player()
     background = pygame.Surface(display.get_size())
     background.fill((0, 0, 0))
     while not game_exit:
@@ -55,9 +71,10 @@ def frame_2(display):
                 game_exit = True
                 quit()
 
-        pressed_keys = pygame.key.get_pressed()
-        player.update(pressed_keys)
-        display.blit(player.image, player.rect)
+        menu(display, 350, 360)
+        display.blit(text_surface2, (10, 5))
+        display.blit(img.logo, (170, 250))
+        display.blit(img.cright, (600, 570))
         pygame.display.flip()
         display.blit(background, (0, 0))
         clock.tick(30)

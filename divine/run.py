@@ -1,4 +1,5 @@
 import logging
+import os
 
 import pygame
 from pygame.locals import *
@@ -7,10 +8,13 @@ from divine.loaders import images as img
 from files import configuration as conf
 
 # Variables
+pygame.font.init()
 log = logging.getLogger(__name__)
 log.addHandler(logging.NullHandler())
 clock = pygame.time.Clock()
 character_image = img.char_right
+path = os.path.abspath("retro.ttf")
+font = pygame.font.Font(path, 12)
 
 
 # Classes
