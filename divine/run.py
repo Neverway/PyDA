@@ -67,6 +67,7 @@ def main():
     conf.frame_1(display)
     pygame.quit()
 
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     main()

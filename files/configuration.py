@@ -31,6 +31,8 @@ def frame_1(display):
             if event.type == pygame.QUIT:
                 game_exit = True
                 quit()
+            if event.type == pygame.KEYDOWN:
+                frame_2(display)
 
         pygame.display.flip()
         display.blit(background, (0, 0))
