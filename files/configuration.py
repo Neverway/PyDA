@@ -1,10 +1,12 @@
 from divine.run import *
 
+# Variables
 last_splash_update = 0
 current_splash_frame = 0
 dasplash = img.sp1
 
 
+# Define functions
 def splashan(display):
     global last_splash_update
     global current_splash_frame
@@ -20,6 +22,7 @@ def splashan(display):
     display.blit(dasplash, (200, 200))
 
 
+# Frames
 def frame_1(display):
     game_exit = False
     player = Player()

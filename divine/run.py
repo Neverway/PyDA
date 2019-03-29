@@ -6,16 +6,14 @@ from pygame.locals import *
 from divine.loaders import images as img
 from files import configuration as conf
 
+# Variables
 log = logging.getLogger(__name__)
 log.addHandler(logging.NullHandler())
 clock = pygame.time.Clock()
 character_image = img.char_right
 
 
-def create_surface():
-    pass
-
-
+# Classes
 class Mob(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -39,6 +37,7 @@ class Player(Mob):
             self.rect.move_ip(2, 0)
 
 
+# Define functions
 def create_display(height=600, width=800, title=True):
     """
     Create a PyGame display.
@@ -56,6 +55,7 @@ def create_display(height=600, width=800, title=True):
     return display
 
 
+# Run program
 def main():
     """Run the program."""
     # Set window resolution
@@ -68,6 +68,7 @@ def main():
     pygame.quit()
 
 
+# Keep program from running on import
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     main()
