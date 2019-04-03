@@ -122,3 +122,41 @@ tut_read = {
     2: page0,
     3: page1
 }
+
+# Developer
+dev_back_black = pygame.image.load('loaders/resources/sprites/dev_back_dark.png')
+dev_back_blue = pygame.image.load('loaders/resources/sprites/dev_back_river.png')
+dev_back_red = pygame.image.load('loaders/resources/sprites/dev_back_cherry.png')
+dev_back = {
+    1: dev_back_black,
+    2: dev_back_blue,
+    3: dev_back_red
+}
+
+dev_back_title = pygame.image.load('loaders/resources/sprites/dev_back_title.png')
+
+dev_text_sub = pygame.image.load('loaders/resources/sprites/dev_text_sub.png')
+dev_text_main = pygame.image.load('loaders/resources/sprites/dev_text_main.png')
+dev_text_layers = pygame.image.load('loaders/resources/sprites/dev_text_layers.png')
+dev_text_player = pygame.image.load('loaders/resources/sprites/dev_text_player.png')
+dev_text_inventory = pygame.image.load('loaders/resources/sprites/dev_text_inventory.png')
+dev_text_setting = pygame.image.load('loaders/resources/sprites/dev_text_settings.png')
+dev_text_debug = pygame.image.load('loaders/resources/sprites/dev_text_debug.png')
+dev_body = {
+    1: dev_text_sub,
+    2: dev_text_main,
+    3: dev_text_layers,
+    4: dev_text_player,
+    5: dev_text_inventory,
+    6: dev_text_setting,
+    7: dev_text_debug,
+}
+
+dev_toggle_on = pygame.image.load('loaders/resources/sprites/dev_text_debug.png')
+dev_toggle_off = pygame.image.load('loaders/resources/sprites/dev_text_debug.png')
+dev_toggle = {
+    1: dev_toggle_on,
+    0: dev_toggle_off
+}
+
+dev_pointer = pygame.image.load('loaders/resources/sprites/dev_pointer.png')

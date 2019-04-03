@@ -104,7 +104,7 @@ def frame_3(display):
                 game_exit = True
                 quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_0:
+                if event.key == pygame.K_F1:
                     developer_init()
 
         pressed_keys = pygame.key.get_pressed()
