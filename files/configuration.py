@@ -12,6 +12,10 @@ text_surface2 = font.render(render_text2, False, (255, 255, 255))
 menu_image = img.new_game
 
 
+def developer_init():
+    pass
+
+
 # Define functions
 def splashan(display, delay):
     global last_splash_update
@@ -30,6 +34,7 @@ def splashan(display, delay):
 
 def menu(display, x, y):
     global menu_image
+    global mframe
     display.blit(menu_image, (x, y))
     if mframe == 1:
         menu_image = img.new_game
@@ -98,6 +103,9 @@ def frame_3(display):
             if event.type == pygame.QUIT:
                 game_exit = True
                 quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0:
+                    developer_init()
 
         pressed_keys = pygame.key.get_pressed()
         player.update(pressed_keys)
