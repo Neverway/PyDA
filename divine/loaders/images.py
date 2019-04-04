@@ -159,4 +159,4 @@ dev_toggle = {
     0: dev_toggle_off
 }
 
-dev_pointer = pygame.image.load('loaders/resources/sprites/dev_pointer.png')
+dev_pointer = pygame.image.load('loaders/resources/sprites/missing.png')

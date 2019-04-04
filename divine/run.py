@@ -42,6 +42,10 @@ class Player(Mob):
             self.rect.move_ip(2, 0)
 
 
+class Developer(Mob):
+    pass
+
+
 class Main(Mob):
     global mframe
 
