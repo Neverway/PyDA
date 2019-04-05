@@ -68,6 +68,7 @@ def frame_1(display):
 
 def frame_2(display):
     game_exit = False
+    global mframe
     background = pygame.Surface(display.get_size())
     background.fill((0, 0, 0))
     while not game_exit:
@@ -77,7 +78,13 @@ def frame_2(display):
                 game_exit = True
                 quit()
             if event.type == pygame.KEYDOWN:
-                global mframe
+                if event.key == pygame.K_z and mframe == 1:
+                    frame_3(display)
+                if event.key == pygame.K_z and mframe == 2:
+                    print("Load Game")
+                if event.key == pygame.K_z and mframe == 3:
+                    game_exit = True
+                    quit()
                 if event.key == pygame.K_UP:
                     mframe -= 1
                     pygame.display.update()
@@ -94,7 +101,6 @@ def frame_2(display):
         display.blit(img.logo, (170, 250))
         display.blit(img.cright, (600, 570))
         pressed_keys = pygame.key.get_pressed()
-        Main.update(main, pressed_keys, frame_max=3, frame_min=1)
         pygame.display.flip()
         display.blit(background, (0, 0))
         clock.tick(30)

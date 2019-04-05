@@ -46,25 +46,7 @@ class Developer(Mob):
     pass
 
 
-class Main(Mob):
-    global mframe
 
-    def update(self, pressed_keys, frame_max, frame_min):
-        global mframe
-        if pressed_keys[K_UP]:
-            if mframe == frame_min:
-                mframe = frame_max
-                print(mframe)
-            else:
-                mframe -= 1
-                print(mframe)
-        if pressed_keys[K_DOWN]:
-            if mframe == frame_max:
-                mframe = frame_min
-                print(mframe)
-            else:
-                mframe += 1
-                print(mframe)
 
 
 # Define functions
