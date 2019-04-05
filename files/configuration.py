@@ -117,12 +117,6 @@ def frame_3(display):
             if event.type == pygame.QUIT:
                 game_exit = True
                 quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F1:
-                    print("this code is functional")
-
-                if event.key == pygame.K_b:
-                    print("B pressed")
 
         pressed_keys = pygame.key.get_pressed()
         player.update(pressed_keys)

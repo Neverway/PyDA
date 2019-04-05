@@ -13,6 +13,7 @@ log = logging.getLogger(__name__)
 log.addHandler(logging.NullHandler())
 clock = pygame.time.Clock()
 character_image = img.char_right
+object_image = img.missing
 path = os.path.abspath("retro.ttf")
 font = pygame.font.Font(path, 12)
 mframe = 1
@@ -41,13 +42,7 @@ class Player(Mob):
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(2, 0)
 
-
-class Developer(Mob):
-    pass
-
-
-
-
+        
 
 # Define functions
 def create_display(height=600, width=800, title=True):
